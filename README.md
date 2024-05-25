@@ -1,5 +1,23 @@
 # CashTokens Airdrop Tool
 
+a fork of [Airdrop-Tool](https://github.com/mr-zwets/airdrop-tool)
+
+modified to exclude addresses from an airdrop
+
+run
+
+`npm i`
+
+fill in the variables in the example_env.txt, rename the file to.env and run
+
+`node recipient.js`
+
+open recipient.json, remove wallet addresses from the list and run
+
+`node airdrop.js`
+
+---
+
 **A handy Javascript program to airdrop fungible tokens to NFT holders!**
 
 ## What it is
