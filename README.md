@@ -8,11 +8,11 @@ run
 
 `npm i`
 
-fill in the variables in the example_env.txt, rename the file to.env and run
+fill in the variables in the example_env.txt, rename the file to .env and run
 
-`node recipient.js`
+`node recipients.js`
 
-open recipient.json, remove wallet addresses from the list and run
+open recipients.json, remove wallet addresses from the list and run
 
 `node airdrop.js`
 
