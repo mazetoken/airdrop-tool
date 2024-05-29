@@ -1,5 +1,13 @@
 SEEDPHRASE=""
 DERIVATIONPATH="m/44'/145'/0'/0/0"
+
+#Fungible cashtoken to be airdropped
 TOKENID_FUNGIBLE=""
+
+#Airdrop to NFT holders/addresses
 TOKENID_NFTS=""
-AIRDOP_AMOUNT_NFT=
+AIRDOP_AMOUNT_TO_NFT=
+
+#Airdrop to Fungible token holders/addresses
+TOKENID_FT=""
+AIRDOP_AMOUNT_TO_FT=

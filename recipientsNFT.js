@@ -1,27 +1,13 @@
 import {lockingBytecodeToCashAddress, hexToBin} from "@bitauth/libauth"
-import { Wallet } from "mainnet-js";
-import { queryNftAddresses, getTapSwapOrigin } from "./queryChainGraph.js"
+import { queryNftAddresses, getTapSwapOrigin } from "./queryChainGraphNFT.js"
 import 'dotenv/config';
 
 const basePath = process.cwd();
 import fs from "fs";
 
-const seedphase = process.env.SEEDPHRASE;
-const derivationPathAddress = process.env.DERIVATIONPATH;
-const tokenIdFungible = process.env.TOKENID_FUNGIBLE;
 const tokenIdNfts = process.env.TOKENID_NFTS;
-const airdropAmountNft = process.env.AIRDOP_AMOUNT_NFT;
 
-const airdropToTapswap = true;
-
-// Initialize wallet & check balance
-const wallet = await Wallet.fromSeed(seedphase, derivationPathAddress);
-const walletAddress = wallet.getDepositAddress();
-const balance = await wallet.getBalance();
-const tokenBalance = await wallet.getTokenBalance(tokenIdFungible);
-console.log(`wallet address: ${walletAddress}`);
-console.log(`Bch amount in walletAddress is ${balance.bch}bch or ${balance.sat}sats`);
-if(balance.sat < 10_000) throw new Error("Wallet does not have enough BCH to start the airdrop!");
+const airdropToTapswap = true; // change to false if you want to exclude TapSwap addresses
 
 // Get airdrop list
 const finalList = await getListRecipients();
@@ -31,7 +17,6 @@ const totalNfts = finalList.reduce((accumulator, currentValue) => accumulator + 
 const totalAirdrop = totalNfts * airdropAmountNft;
 console.log("totalNfts ", totalNfts);
 console.log("totalAirdrop ", totalAirdrop);
-if(tokenBalance < totalAirdrop) throw new Error("Wallet does not have enough tokens to execute the airdrop!");
 
 async function getListRecipients() {
     // note: chaingraph only returns first 5000 results
@@ -45,11 +30,11 @@ async function getListRecipients() {
         // Logic for P2SH addresses (Tapswap contracts)
         if(address.startsWith("bitcoincash:p")){
           if(!airdropToTapswap) continue;
-          //console.log("\n"+address);
-          //console.log(element.transaction_hash);
+          console.log("\n"+address);
+          console.log(element.transaction_hash);
           const lockingBytecode2 = await getTapSwapOrigin(element.transaction_hash.slice(2));
           address = lockingBytecodeToCashAddress(hexToBin(lockingBytecode2.slice(2)), "bitcoincash");
-          //console.log(address)
+          console.log(address)
         }
         nftsPerAddress[address] = (nftsPerAddress[address] || 0) + 1;
     };
@@ -62,7 +47,7 @@ async function getListRecipients() {
     console.log(sortable);
     
     fs.writeFileSync(
-      `${basePath}/recipients.json`,
+      `${basePath}/recipientsNFT.json`,
       JSON.stringify(sortable, null, 2)
     );
 

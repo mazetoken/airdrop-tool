@@ -1,11 +1,11 @@
 import { Wallet, TokenSendRequest } from "mainnet-js";
 import 'dotenv/config';
-import recipients from "./recipients.json" assert {type: "json"};
+import recipientsNft from "./recipientsNFT.json" assert {type: "json"};
 
 const seedphase = process.env.SEEDPHRASE;
 const derivationPathAddress = process.env.DERIVATIONPATH;
 const tokenIdFungible = process.env.TOKENID_FUNGIBLE;
-const airdropAmountNft = process.env.AIRDOP_AMOUNT_NFT;
+const airdropAmountNft = process.env.AIRDOP_AMOUNT_TO_NFT;
 
 // Initialize wallet & check balance
 const wallet = await Wallet.fromSeed(seedphase, derivationPathAddress);
@@ -15,16 +15,10 @@ const tokenBalance = await wallet.getTokenBalance(tokenIdFungible);
 console.log(`wallet address: ${walletAddress}`);
 console.log(`Bch amount in walletAddress is ${balance.bch}bch or ${balance.sat}sats`);
 if(balance.sat < 10_000) throw new Error("Wallet does not have enough BCH to start the airdrop!");
-
-// Get airdrop stats
-const totalNfts = recipients.reduce((accumulator, currentValue) => accumulator + currentValue[1],0,);
-const totalAirdrop = totalNfts * airdropAmountNft;
-console.log("totalNfts ", totalNfts);
-console.log("totalAirdrop ", totalAirdrop);
 if(tokenBalance < totalAirdrop) throw new Error("Wallet does not have enough tokens to execute the airdrop!");
 
 // Start airdrop
-await airdropTokens(recipients);
+await airdropTokens(recipientsNft);
 
 async function airdropTokens(listRecipients){
   for(let i = 0; i<listRecipients.length; i++){

@@ -2,19 +2,54 @@
 
 a fork of [Airdrop-Tool](https://github.com/mr-zwets/airdrop-tool)
 
-modified to exclude addresses from an airdrop
+modified to exclude addresses from an airdrop and added fungible cashtokens to fungible cashtokens holders/addresses airdrop script
+
+you need to install [nodejs](https://nodejs.org) and use a command line (e.g. Visual Studio, PowerShell etc.)
+
+open the main folder, open example_env.txt, fill in the variables, rename to .env
+
+navigate to the main directory
 
 run
 
 `npm i`
 
-fill in the variables in the example_env.txt, rename the file to .env and run
+### Airdrop fungible tokens to NFTs holders/addresses (including TapSwap addresses)
 
-`node recipients.js`
+run
 
-open recipients.json, remove wallet addresses from the list and run
+`node recipientsNFT.js`
 
-`node airdrop.js`
+open recipientsNFT.json, remove manually addresses from the list (if you want to)
+
+run
+
+`node airdropNFT.js`
+
+### Airdrop fungible cashtokens to fungible cashtokens holders/addresses (excluding TapSwap addresses)
+
+navigate to the main directory
+
+run
+
+`node recipientsFT.js`
+
+open recipientsFT.json, remove manually addresses from the list (if you want to)
+
+run
+
+`node airdropFT.js`
+
+it was tested with <100 addresses (not sure if it works with e.g. 1000 addresses)
+
+### Airdrop to random addresses
+
+modify `recipientsNFT.json` or `recipientsFT.json` for your needs, e.g. if you want to test it - airdrop to only yourself (one address on the list)
+
+sample
+
+`recipients_sample.json`
+
 
 ---
 
