@@ -46,9 +46,26 @@ it was tested with <100 addresses (not sure if it works with e.g. 1000 addresses
 
 modify `recipientsNFT.json` or `recipientsFT.json` for your needs, e.g. if you want to test it - airdrop to only yourself (one address on the list)
 
-sample
+example `recipients_sample.json`
 
-`recipients_sample.json`
+```
+[
+  [
+    "bitcoincash:...",
+    1
+  ],
+  [
+    "bitcoincash:...",
+    1
+  ],
+  [
+    "bitcoincash:...",
+    1
+  ]
+]
+```
+
+the number - 1 - after the BCH address is the multiplier. You can change it, for example, to 2 for specific addresses (they will receive double the number of tokens)
 
 
 ---
