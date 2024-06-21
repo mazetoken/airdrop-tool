@@ -2,19 +2,21 @@
 
 a fork of [Airdrop-Tool](https://github.com/mr-zwets/airdrop-tool)
 
-modified to exclude addresses from an airdrop and added fungible cashtokens to fungible cashtokens holders/addresses airdrop script
+modified to exclude addresses from an airdrop, added fungible cashtokens to fungible cashtokens holders/addresses airdrop and airdrop BCH to fungible cashtokens or NFTs holders/addresses
 
 you need to install [nodejs](https://nodejs.org) and use a command line (e.g. Visual Studio, PowerShell etc.)
 
+copy or clone the repository
+
 open the main folder, open example_env.txt, fill in the variables, rename to .env
 
-navigate to the main directory
+from the command line navigate to the main directory
 
 run
 
 `npm i`
 
-### Airdrop fungible tokens to NFTs holders/addresses (including TapSwap addresses)
+### Airdrop fungible cashtokens to NFTs holders/addresses (including TapSwap addresses)
 
 run
 
@@ -26,9 +28,9 @@ run
 
 `node airdropNFT.js`
 
-### Airdrop fungible cashtokens to fungible cashtokens holders/addresses (excluding TapSwap addresses)
+### Airdrop fungible cashtokens to fungible cashtokens holders/addresses (excluding TapSwap addresses; equal amount for each address)
 
-navigate to the main directory
+from the command line navigate to the main directory
 
 run
 
@@ -40,7 +42,7 @@ run
 
 `node airdropFT.js`
 
-it was tested with <100 addresses (not sure if it works with e.g. 1000 addresses)
+it was tested with < 100 addresses (not sure if it works with e.g. 1000 addresses)
 
 ### Airdrop to random addresses
 
@@ -66,6 +68,21 @@ example `recipients_sample.json`
 ```
 
 the number - 1 - after the BCH address is the multiplier. You can change it, for example, to 2 for specific addresses (they will receive double the number of tokens)
+
+### Airdrop BCH satoshi to fungible cashtokens or NFTs holders/addresses (excluding TapSwap addresses; equal amount for each address)
+
+from the command line navigate to the main directory
+
+run
+
+`node recipientsFT.js` or `node recipientsNFT.js`
+
+open recipientsFT.json or recipientsNFT.json, remove manually addresses from the list (if you want to)
+
+run
+
+`node satsAirdropFT.js` if airdrop to fungible CashTokens holders or `node satsAirdropNFT.js` if airdrop to NFTs holders
+
 
 
 ---

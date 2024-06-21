@@ -1,13 +1,21 @@
-SEEDPHRASE=""
 DERIVATIONPATH="m/44'/145'/0'/0/0"
 
-#Fungible cashtoken to be airdropped
+#Your wallet seed phrase
+SEEDPHRASE=""
+
+#Fungible CashTokens category to be airdropped
 TOKENID_FUNGIBLE=""
 
-#Airdrop to NFT holders/addresses
-TOKENID_NFTS=""
-AIRDOP_AMOUNT_TO_NFT=
+#BCH amount in satoshi per address if BCH is airdropped instead of CashTokens
+SATS_AMOUNT=
 
-#Airdrop to Fungible token holders/addresses
+#Op_Return message
+OP_RETURN=""
+
+#Airdrop fungible CashTokens to NFT category holders
+TOKENID_NFTS=""
+AIRDROP_AMOUNT_TO_NFT=
+
+#Airdrop fungible CashTokens to fungible CashTokens category holders
 TOKENID_FT=""
-AIRDOP_AMOUNT_TO_FT=
+AIRDROP_AMOUNT_TO_FT=

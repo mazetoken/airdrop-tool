@@ -6,6 +6,8 @@ const basePath = process.cwd();
 import fs from "fs";
 
 const tokenIdNfts = process.env.TOKENID_NFTS;
+const airdropAmountNft = process.env.AIRDROP_AMOUNT_TO_NFT;
+const satsAirdropAmount = process.env.SATS_AMOUNT_TO_FT;
 
 const airdropToTapswap = true; // change to false if you want to exclude TapSwap addresses
 
@@ -15,8 +17,10 @@ const finalList = await getListRecipients();
 // Get airdrop stats
 const totalNfts = finalList.reduce((accumulator, currentValue) => accumulator + currentValue[1],0,);
 const totalAirdrop = totalNfts * airdropAmountNft;
+const totalSatsAirdrop = totalNfts * satsAirdropAmount;
 console.log("totalNfts ", totalNfts);
 console.log("totalAirdrop ", totalAirdrop);
+console.log("totalSatsAirdrop ", totalSatsAirdrop);
 
 async function getListRecipients() {
     // note: chaingraph only returns first 5000 results

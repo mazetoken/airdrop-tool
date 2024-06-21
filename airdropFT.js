@@ -1,17 +1,18 @@
-import { Wallet, TokenSendRequest } from "mainnet-js";
+import { Wallet, TokenSendRequest, OpReturnData } from "mainnet-js";
 import 'dotenv/config';
 import recipientsFt from "./recipientsFT.json" assert {type: "json"};
 
 const seedphase = process.env.SEEDPHRASE;
 const derivationPathAddress = process.env.DERIVATIONPATH;
 const tokenIdFungible = process.env.TOKENID_FUNGIBLE;
-const airdropAmountFt = process.env.AIRDOP_AMOUNT_TO_FT;
+const airdropAmountFt = process.env.AIRDROP_AMOUNT_TO_FT;
+const opReturn = process.env.OP_RETURN;
 
 // Initialize wallet & check balance
 const wallet = await Wallet.fromSeed(seedphase, derivationPathAddress);
 const walletAddress = wallet.getDepositAddress();
 const balance = await wallet.getBalance();
-const tokenBalance = await wallet.getTokenBalance(tokenIdFungible);
+//const tokenBalance = await wallet.getTokenBalance(tokenIdFungible);
 console.log(`wallet address: ${walletAddress}`);
 console.log(`Bch amount in walletAddress is ${balance.bch}bch or ${balance.sat}sats`);
 if(balance.sat < 10_000) throw new Error("Wallet does not have enough BCH to start the airdrop!");
@@ -27,13 +28,16 @@ async function airdropTokens(listRecipients){
     const destinationAddress = element[0];
     const airdropAmountAddress = element[1] * airdropAmountFt;
   
-    const airdropOutput = new TokenSendRequest({
+    let opreturnData = OpReturnData.from(opReturn);
+    const airdropOutput = new TokenSendRequest(
+      {
       cashaddr: destinationAddress,
       value: 800,
       tokenId: tokenIdFungible,
       amount: airdropAmountAddress
-    });
-    const { txId } = await wallet.send([airdropOutput]);
+      }
+    );
+    const { txId } = await wallet.send([airdropOutput, opreturnData]);
     console.log(txId);
   }
 }

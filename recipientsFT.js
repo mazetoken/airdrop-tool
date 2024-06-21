@@ -6,7 +6,8 @@ const basePath = process.cwd();
 import fs from "fs";
 
 const tokenIdFt = process.env.TOKENID_FT;
-const airdropAmountFt = process.env.AIRDOP_AMOUNT_TO_FT;
+const airdropAmountFt = process.env.AIRDROP_AMOUNT_TO_FT;
+const satsAirdropAmount = process.env.SATS_AMOUNT_TO_FT;
 
 const airdropToTapswap = false; // do not change
 
@@ -16,8 +17,10 @@ const finalList = await getListRecipients();
 // Get airdrop stats
 const totalFts = finalList.reduce((accumulator, currentValue) => accumulator + currentValue[1],0,);
 const totalAirdrop = totalFts * airdropAmountFt;
+const totalSatsAirdrop = totalFts * satsAirdropAmount;
 console.log("totalAddresses ", totalFts);
 console.log("totalAirdrop ", totalAirdrop);
+console.log("totalSatsAirdrop ", totalSatsAirdrop);
 
 async function getListRecipients() {
     // note: chaingraph only returns first 5000 results
