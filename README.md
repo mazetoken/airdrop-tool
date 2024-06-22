@@ -2,13 +2,22 @@
 
 a fork of [Airdrop-Tool](https://github.com/mr-zwets/airdrop-tool)
 
-modified to exclude addresses from an airdrop, added fungible cashtokens to fungible cashtokens holders/addresses airdrop and airdrop BCH to fungible cashtokens or NFTs holders/addresses
+modified to exclude addresses from an airdrop, added fungible cashtokens to fungible cashtokens holders/addresses airdrop and airdrop BCH to fungible cashtokens or NFTs holders/addresses, add info about an airdrop in op_return message
 
 you need to install [nodejs](https://nodejs.org) and use a command line (e.g. Visual Studio, PowerShell etc.)
 
 copy or clone the repository
 
 open the main folder, open example_env.txt, fill in the variables, rename to .env
+
+example
+
+```
+...
+#Op_Return message
+OP_RETURN="CashTokens airdrop. Have fun"
+...
+```
 
 from the command line navigate to the main directory
 
